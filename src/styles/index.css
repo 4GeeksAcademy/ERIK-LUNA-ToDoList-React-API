@@ -1,12 +1,55 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-/* 
+}
+.contenedor-principal {
+   
+    height: auto;
+    width: 550px;
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  
+  .contenedor-formulario {
+   
+    width: 500px;
+    height: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .contenedor-tarea {
+    width: 440px;
+    height: auto;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .mi-li {
+    list-style: none; /* Quita los puntos de lista predeterminados */
+    margin-bottom: 5px; /* Espacio entre elementos li */
+    
+    height: auto;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 5px;
+  }
+  
+ 
+  .mi-li .mi-button {
+    background-color: #ff0000; /* Cambia el color de fondo del botón */
+    color: #ffffff; /* Cambia el color del texto del botón */
+    border: none; /* Quita el borde del botón */
+    padding: 5px 10px; /* Espaciado interno del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  }
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
-
-*/
+  

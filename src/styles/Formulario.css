@@ -1,0 +1,18 @@
+
+
+.mi-formulario {
+    width: 400px; /* Ancho del campo de entrada al 100% del contenedor */
+    height: auto;
+    margin-bottom: 20px; 
+  }
+  
+  
+  .mi-input {
+    width: 445px; /* Ancho del campo de entrada al 100% del contenedor */
+    height: auto;
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 4px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    outline: none; /* Elimina el borde de enfoque predeterminado */
+  }

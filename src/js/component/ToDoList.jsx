@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import Formulario from "./Formulario.jsx";
+import "../../styles/index.css";
+import "../../styles/Formulario.css";
 
 const ToDoList = () => {
   const [texto, setTexto] = useState("");
   const [tareas, setTareas] = useState([]);
 
   const agregarTarea = () => {
-    if (texto.trim() !== "") {
+    // if (texto.trim() !== "") {
       setTareas([...tareas, texto]);
       setTexto(""); // Limpia el input después de agregar la tarea
-    }
+    // }
   };
 
   const eliminarTarea = (index) => {
@@ -26,10 +28,10 @@ const ToDoList = () => {
 		<div className="contenedor-tarea"> 
     <ul>
           {tareas.map((tarea, index) => (
-            <li key={index}>
-              {tarea}{" "}
-              <button onClick={() => eliminarTarea(index)}>X</button>
-            </li>
+            <li key={index} className="mi-li">
+            {tarea}{" "}
+            <button onClick={() => eliminarTarea(index)} className="mi-button">X</button>
+          </li>
           ))}
     </ul>
 		</div>

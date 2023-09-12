@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/Formulario.css";
 
 const Formulario = ({ texto, setTexto, agregarTarea }) => {
   const cambiarTexto = (event) => {
@@ -14,13 +15,14 @@ const Formulario = ({ texto, setTexto, agregarTarea }) => {
   };
 
   return (
-    <form>
+    <form className="mi-formulario">
       <input
         type="text"
         value={texto}
         onChange={cambiarTexto}
-        onKeyDown={manejarKeyDown} // Cambia onKeyPress a onKeyDown
+        onKeyDown={manejarKeyDown}
         placeholder="Introduce algún texto y presiona Enter"
+        className="mi-input"
       />
     </form>
   );
