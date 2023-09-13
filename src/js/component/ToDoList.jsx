@@ -8,10 +8,10 @@ const ToDoList = () => {
   const [tareas, setTareas] = useState([]);
 
   const agregarTarea = () => {
-    // if (texto.trim() !== "") {
+   
       setTareas([...tareas, texto]);
-      setTexto(""); // Limpia el input después de agregar la tarea
-    // }
+      setTexto(""); 
+   
   };
 
   const eliminarTarea = (index) => {

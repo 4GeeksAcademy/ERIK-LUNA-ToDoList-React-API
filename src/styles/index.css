@@ -7,14 +7,14 @@ body {
 .contenedor-principal {
    
     height: auto;
-    width: 550px;
+    width: 530px;
     background-color: #f0f0f0;
     padding: 20px;
   }
   
   .contenedor-formulario {
    
-    width: 500px;
+    width: 490px;
     height: auto;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -23,7 +23,7 @@ body {
   }
   
   .contenedor-tarea {
-    width: 440px;
+    width: 444px;
     height: auto;
     margin-top: 20px;
     border: 1px solid #ccc;
@@ -52,4 +52,10 @@ body {
     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
   }
 
-  
+  h1 {
+    align-items: center;
+    font-size: 50px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    justify-content: center;
+  }
