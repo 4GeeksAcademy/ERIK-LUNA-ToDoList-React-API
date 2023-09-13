@@ -23,7 +23,7 @@ body {
   }
   
   .contenedor-tarea {
-    width: 444px;
+    width: auto;
     height: auto;
     margin-top: 20px;
     border: 1px solid #ccc;
@@ -33,9 +33,10 @@ body {
   }
   
   .mi-li {
-    list-style: none; /* Quita los puntos de lista predeterminados */
-    margin-bottom: 5px; /* Espacio entre elementos li */
-    
+    list-style: none;
+    margin-bottom: 5px; 
+    display: flex;
+    justify-content: space-between;
     height: auto;
     margin-top: 5px;
     border: 1px solid #ccc;
@@ -45,6 +46,7 @@ body {
   
  
   .mi-li .mi-button {
+
     background-color: #ff0000; /* Cambia el color de fondo del botón */
     color: #ffffff; /* Cambia el color del texto del botón */
     border: none; /* Quita el borde del botón */
