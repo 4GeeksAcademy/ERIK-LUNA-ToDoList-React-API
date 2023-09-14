@@ -3,13 +3,13 @@ import "../../styles/Formulario.css";
 
 const Formulario = ({ texto, setTexto, agregarTarea }) => {
   const cambiarTexto = (event) => {
-    // Actualiza la variable texto al cambiar el valor del input
+   
     setTexto(event.target.value);
   };
 
   const manejarKeyDown = (event) => {
     if (event.key === "Enter") {
-      event.preventDefault(); // Evita la recarga de la página por defecto
+      event.preventDefault(); 
       agregarTarea();
     }
   };

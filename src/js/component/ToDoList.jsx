@@ -24,7 +24,11 @@ const ToDoList = () => {
     <div className="contenedor-principal">
       <h1>TO DO LIST</h1>
       <div className="contenedor-formulario">
-        <Formulario texto={texto} setTexto={setTexto} agregarTarea={agregarTarea} />
+        <Formulario 
+        texto={texto} 
+        setTexto={setTexto} 
+        agregarTarea={agregarTarea} />
+        
 		<div className="contenedor-tarea"> 
     <ul>
           {tareas.map((tarea, index) => (
