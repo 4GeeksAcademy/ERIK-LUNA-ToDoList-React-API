@@ -10,22 +10,22 @@ const ToDoList = () => {
 
 
   useEffect(() => {
-    fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna"  + Date.now())
+    fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna" )
       .then((resp) => resp.json())
       .then((data) => {
         setTareas(data);
-        setLoading(false); // Actualiza el estado de loading cuando la solicitud se completa
+        setLoading(false); 
       })
       .catch((error) => {
         // Manejo de errores
         console.log(error);
-        setLoading(false); // Asegúrate de manejar errores y actualizar loading en caso de error
+        setLoading(false); 
       });
   }, []);
 
 
   const agregarTarea = () => {
-    setTareas([...tareas, { label: texto }]); // Agrega una nueva tarea con la propiedad "label"
+    setTareas([...tareas, { label: texto }]); 
     setTexto("");
   };
 
