@@ -13,6 +13,7 @@ const ToDoList = () => {
     fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna" )
       .then((resp) => resp.json())
       .then((data) => {
+        console.log(data); 
         setTareas(data);
         setLoading(false); 
       })
