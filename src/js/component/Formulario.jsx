@@ -1,33 +1,33 @@
-import React from "react";
-import "../../styles/Formulario.css";
+import React, { useState } from "react";
 
 const Formulario = ({ texto, setTexto, agregarTarea }) => {
-  const cambiarTexto = (event) => {
-   
-    setTexto(event.target.value);
-  };
-
-  const manejarKeyDown = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault(); 
-      agregarTarea();
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      agregarTarea(e.target.value);
     }
   };
 
   return (
-    <form className="mi-formulario">
+    <div className="formulario">
       <input
         type="text"
+        placeholder="Nueva tarea"
         value={texto}
-        onChange={cambiarTexto}
-        onKeyDown={manejarKeyDown}
-        placeholder="Introduce algún texto y presiona Enter"
-        className="mi-input"
+        onChange={(e) => setTexto(e.target.value)}
+        onKeyDown={handleKeyPress} // Agregar manejo de evento Enter aquí
       />
-    </form>
+      <button onClick={agregarTarea}>Agregar</button>
+    </div>
   );
 };
 
 export default Formulario;
+
+
+
+
+
+
+
 
 

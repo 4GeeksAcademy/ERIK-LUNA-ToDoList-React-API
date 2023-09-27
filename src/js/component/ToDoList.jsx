@@ -11,6 +11,7 @@ const ToDoList = () => {
 
 
   useEffect(() => {
+    crearUsuario()
     fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna")
       .then((resp) => resp.json())
       .then((data) => {
@@ -24,15 +25,39 @@ const ToDoList = () => {
       });
   }, []);
 
-  const agregarTarea = () => {
-    const nuevaTarea = { label: texto };
-  
+  useEffect(() => {
+    actualizarTareas()
+  }, [tareas]);
+
+  const agregarTarea = (tarea) => {
+    const nuevaTarea = { label: tarea, done: false };
+    setTareas([...tareas, nuevaTarea])
+  }
+  const crearUsuario = () => {
     fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify([]),
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      console.log(date)
+    })
+    .catch((error) => {
+      console.log(error);
+      setApiError("Error al agregar tarea.");
+    })
+    
+};
+  const actualizarTareas = () => {
+      fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify([...tareas, nuevaTarea]),
+      body: JSON.stringify(tareas),
     })
       .then((resp) => resp.json())
       .then((data) => {
@@ -42,39 +67,21 @@ const ToDoList = () => {
         console.log(error);
         setApiError("Error al agregar tarea.");
       })
-      .finally(() => {
-        // Actualizar el estado local sin importar si la solicitud fue exitosa o no.
-        setTareas([...tareas, nuevaTarea]);
-      });
+      
   };
 
   const eliminarTarea = (index) => {
-    const tareaEliminada = tareas[index];
     const nuevasTareas = tareas.filter((_, i) => i !== index);
-  
-    fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(nuevasTareas),
-    })
-      .then((resp) => resp.json())
-      .then(() => {
-        setTareas(nuevasTareas);
-      })
-      .catch((error) => {
-        console.log(error);
-        setApiError("Error al eliminar tarea.");
-      });
+    setTareas(nuevasTareas);
   };
 
   const limpiarTareas = () => {
     fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna", {
-      method: "PUT",
+      method: "DELETE",
     })
-      .then(() => {
-        setTareas([]);
+      .then((resp) => {
+        console.log(resp)
+        setTareas([])
       })
       .catch((error) => {
         console.log(error);
@@ -95,14 +102,16 @@ const ToDoList = () => {
           ) : (
             <div>
               <ul>
-                {tareas.map((tarea, index) => (
+                {tareas && tareas.length > 0 ? tareas.map((tarea, index) => (
                   <li key={index} className="mi-li">
                     {tarea.label}{" "}
                     <button onClick={() => eliminarTarea(index)} className="mi-button">
                       X
                     </button>
                   </li>
-                ))}
+                )):
+                <li className="mi-li">No hay tareas</li>
+                }
               </ul>
               <button onClick={limpiarTareas} className="limpiar-button">
                 Limpiar tareas
