@@ -1,127 +1,143 @@
-import React, { useState, useEffect } from "react";
-import Formulario from "./Formulario.jsx";
-import "../../styles/index.css";
-import "../../styles/Formulario.css";
 
+import React, {useState, useEffect} from "react";
+
+
+
+//create your first component
 const ToDoList = () => {
-  const [texto, setTexto] = useState("");
-  const [tareas, setTareas] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [apiError, setApiError] = useState(null);
+
+	
+	const [tarea,setTarea] = useState("");
+	const [list,setList] = useState([]);
 
 
-  useEffect(() => {
-    crearUsuario()
-    fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna")
-      .then((resp) => resp.json())
-      .then((data) => {
-        setTareas(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setApiError("Error al cargar tareas desde la API.");
-        setLoading(false);
-      });
-  }, []);
+	/*const listItems = list.map((item) =>
+	<li key={item.toString()}>
+	{item}
+  </li>
+	);*/
 
-  useEffect(() => {
-    actualizarTareas()
-  }, [tareas]);
+	const deleteTarea = (indexItem) => {
+		setList((prevState) =>
+		  prevState.filter((listItems, index) => index !== indexItem)
+		);
+	  };
+	  
 
-  const agregarTarea = (tarea) => {
-    const nuevaTarea = { label: tarea, done: false };
-    setTareas([...tareas, nuevaTarea])
-  }
-  const crearUsuario = () => {
-    fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify([]),
-  })
-    .then((resp) => resp.json())
-    .then((data) => {
-      console.log(date)
-    })
-    .catch((error) => {
-      console.log(error);
-      setApiError("Error al agregar tarea.");
-    })
-    
-};
-  const actualizarTareas = () => {
-      fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(tareas),
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setTexto("");
-      })
-      .catch((error) => {
-        console.log(error);
-        setApiError("Error al agregar tarea.");
-      })
-      
-  };
+	function agregarTarea(e) {
+		e.preventDefault()
+// {label: 'sample task', done: false}
+		// setList([...list, {tarea}]);
+		setList(list.concat({label: tarea, done: false}))
+		setTarea("")
+	}
 
-  const eliminarTarea = (index) => {
-    const nuevasTareas = tareas.filter((_, i) => i !== index);
-    setTareas(nuevasTareas);
-  };
 
-  const limpiarTareas = () => {
-    fetch("https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna", {
-      method: "DELETE",
-    })
-      .then((resp) => {
-        console.log(resp)
-        setTareas([])
-      })
-      .catch((error) => {
-        console.log(error);
-        setApiError("Error al limpiar tareas.");
-      });
-  };
+	function crearUsuario(){
+		fetch(`https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna`,
+		{method: 'POST', 
+		headers: {
+			'Content-Type': 'application/json'},
+		body: JSON.stringify([])
+	  })
+		.then((response)=>response.json())
+		.then((data)=>console.log(data))
+	}
 
-  return (
-    <div className="contenedor-principal">
-      <h1>TO DO LIST</h1>
-      <div className="contenedor-formulario">
-        <Formulario texto={texto} setTexto={setTexto} agregarTarea={agregarTarea} />
-        <div className="contenedor-tarea">
-          {loading ? (
-            <p>Cargando tareas...</p>
-          ) : apiError ? (
-            <p>Error al cargar tareas desde la API.</p>
-          ) : (
-            <div>
-              <ul>
-                {tareas && tareas.length > 0 ? tareas.map((tarea, index) => (
-                  <li key={index} className="mi-li">
-                    {tarea.label}{" "}
-                    <button onClick={() => eliminarTarea(index)} className="mi-button">
-                      X
-                    </button>
-                  </li>
-                )):
-                <li className="mi-li">No hay tareas</li>
-                }
-              </ul>
-              <button onClick={limpiarTareas} className="limpiar-button">
-                Limpiar tareas
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
+	function obtenerLista(){
+		fetch(`https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna`,
+		{method: 'GET', 
+		
+	  })
+		.then((response)=>response.json())
+		.then((data)=>setList(data))
+	}
+
+
+
+	function deleteList() {
+		fetch(`https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna`, {
+		  method: 'DELETE',
+		  headers: {
+			'Content-Type': 'application/json'
+		  }
+		})
+		  .then((response) => response.json())
+		  .then((data) => {
+			console.log(data);
+			if (data.result === "ok") {
+			  setList([]);
+			}
+		  })
+		  .catch((error) => console.error('Error deleting list:', error));
+	  }
+	  
+
+	function actualizar(){
+		fetch(`https://playground.4geeks.com/apis/fake/todos/user/Erik-Luna`,
+		{method: 'PUT', 
+		headers: {
+			'Content-Type': 'application/json'},
+		body: JSON.stringify(list)
+	  })
+		.then((response)=>response.json())
+		.then((data)=>console.log(data))
+	}
+
+
+
+	useEffect (()=>{
+		crearUsuario();
+		obtenerLista()
+	},[])
+
+	useEffect (()=>{
+		actualizar()
+		},[list])
+
+	return (
+
+	<>
+  <div className="task-container card container bg-info text-white d-flex flex-column align-items-center mt-3 md-w50">
+    <h2 className="titulo p-2">TODOLIST</h2>
+    <div className="card-body">
+      <input
+        type="text"
+        className="input m-1 w-85"
+        value={tarea}
+        id="exampleInput"
+        aria-describedby="inputHelp"
+        onChange={(e) => { setTarea(e.target.value) }}
+        placeholder="Añadir una tarea."
+      />
+      <button
+        type="submit"
+        className="btn btn-primary btn-sm"
+        onClick={agregarTarea}
+      >
+        Agregar
+      </button>
     </div>
-  );
+
+    <div className="to-do-list d-flex">
+      <ul>
+        {list.map((item, index) => (
+          <li key={index}>
+            {item.label}
+            <button className="btn" onClick={() => deleteTarea(index)}>
+              <i className="fas fa-trash-alt" />
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    
+  </div>
+</>
+
+
+	);
 };
 
 export default ToDoList;
